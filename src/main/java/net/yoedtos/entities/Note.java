@@ -8,18 +8,21 @@ public class Note {
     @Getter
     private final Title title;
     @Getter
+    private final String content;
+    @Getter
     private final User owner;
 
-    public Note(Title title, User owner) {
+    public Note(Title title, String content, User owner) {
         this.title = title;
+        this.content = content;
         this.owner = owner;
     }
 
-    public static Either<Error, Note> create(String title, User owner) {
+    public static Either<Error, Note> create(String title, String content, User owner) {
         var titleOrError = Title.create(title);
         if (titleOrError.isLeft()) {
             return Either.left(new InvalidTitleError());
         }
-        return Either.right(new Note(titleOrError.get(), owner));
+        return Either.right(new Note(titleOrError.get(), content, owner));
     }
 }
