@@ -17,7 +17,7 @@ public class Title {
         if (Title.validate(title)) {
             return right(new Title(title));
         }
-        return left(new InvalidTitleError());
+        return left(new InvalidTitleError(title));
     }
 
     public static boolean validate(String title) {

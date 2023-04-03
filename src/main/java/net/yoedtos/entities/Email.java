@@ -18,7 +18,7 @@ public class Email {
         if(Email.validate(email)) {
             return Either.right(new Email(email));
         }
-        return Either.left(new InvalidEmailError());
+        return Either.left(new InvalidEmailError(email));
     }
 
     public static boolean validate(String email) {

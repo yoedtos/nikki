@@ -21,7 +21,7 @@ public class Note {
     public static Either<Error, Note> create(String title, String content, User owner) {
         var titleOrError = Title.create(title);
         if (titleOrError.isLeft()) {
-            return Either.left(new InvalidTitleError());
+            return Either.left(new InvalidTitleError(title));
         }
         return Either.right(new Note(titleOrError.get(), content, owner));
     }

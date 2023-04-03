@@ -33,6 +33,6 @@ public class NoteTest {
     public void shouldNotBeCreatedWithInvalidTitle() {
         var invalidTitle = "";
         var note = Note.create(invalidTitle, validContent, validOwner);
-        assertThat(note).isEqualTo(Either.left(new InvalidTitleError()));
+        assertThat(note).isEqualTo(Either.left(new InvalidTitleError(invalidTitle)));
     }
 }

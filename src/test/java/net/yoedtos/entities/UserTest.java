@@ -12,7 +12,7 @@ public class UserTest {
     public void shouldNotCreateUserWithInvalidEmail() {
         String invalidEmail = "invalid_email";
         var error = User.create(new UserData(invalidEmail));
-        assertThat(error).isEqualTo(left(new InvalidEmailError()));
+        assertThat(error).isEqualTo(left(new InvalidEmailError(invalidEmail)));
     }
 
     @Test
