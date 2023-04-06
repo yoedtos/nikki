@@ -4,6 +4,7 @@ import static io.vavr.control.Either.left;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import net.yoedtos.entities.error.InvalidEmailError;
+import net.yoedtos.entities.error.InvalidPasswordError;
 import org.junit.Test;
 
 public class UserTest {
@@ -22,5 +23,13 @@ public class UserTest {
         String validEmail = "any@email.com";
         var user = User.create(new UserData(validEmail, validPassword)).get();
         assertThat(user.email.value).isEqualTo(validEmail);
+    }
+
+    @Test
+    public void shouldNotCreateUserWithNumberLessPassword() {
+        String validEmail = "any@email.com";
+        String invalidPassword = "password";
+        var error = User.create(new UserData(validEmail, invalidPassword));
+        assertThat(error).isEqualTo(left(new InvalidPasswordError()));
     }
 }
