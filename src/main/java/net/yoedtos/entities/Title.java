@@ -4,10 +4,12 @@ import static io.vavr.control.Either.left;
 import static io.vavr.control.Either.right;
 
 import io.vavr.control.Either;
+import lombok.Getter;
 import net.yoedtos.entities.error.InvalidTitleError;
 
-public class Title {
-    public final String value;
+public final class Title {
+    @Getter
+    private final String value;
 
     private Title(String value) {
         this.value = value;

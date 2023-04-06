@@ -1,12 +1,14 @@
 package net.yoedtos.entities;
 
 import io.vavr.control.Either;
+import lombok.Getter;
 import net.yoedtos.entities.error.InvalidEmailError;
 
 import java.util.regex.Pattern;
 
-public class Email {
-    public final String value;
+public final class Email {
+    @Getter
+    private final String value;
     private static final String regex = "^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~]" +
             "(\\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\\.?[a-zA-Z0-9])*\\.[a-zA-Z](-?[a-zA-Z0-9])+$";
 

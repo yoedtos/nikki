@@ -7,7 +7,7 @@ import io.vavr.control.Either;
 import lombok.Getter;
 import net.yoedtos.entities.error.InvalidPasswordError;
 
-public class Password {
+public final class Password {
     @Getter
     private final String value;
 

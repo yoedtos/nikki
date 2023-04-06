@@ -24,9 +24,9 @@ public class NoteTest {
     public void shouldBeCreatedWithValidTitleAndOwner() {
         var validTitle = "My note";
         var note = Note.create(validTitle, validContent, validOwner).get();
-        assertThat(note.getTitle().value).isEqualTo(validTitle);
+        assertThat(note.getTitle().getValue()).isEqualTo(validTitle);
         assertThat(note.getContent()).isEqualTo(validContent);
-        assertThat(note.getOwner().email.value).isEqualTo(validEmail);
+        assertThat(note.getOwner().getEmail().getValue()).isEqualTo(validEmail);
     }
 
     @Test

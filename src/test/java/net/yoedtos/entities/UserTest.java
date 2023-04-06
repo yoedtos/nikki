@@ -22,7 +22,7 @@ public class UserTest {
     public void shouldCreateUserWithValidData() {
         String validEmail = "any@email.com";
         var user = User.create(new UserData(validEmail, validPassword)).get();
-        assertThat(user.email.value).isEqualTo(validEmail);
+        assertThat(user.getEmail().getValue()).isEqualTo(validEmail);
     }
 
     @Test

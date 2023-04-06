@@ -4,7 +4,7 @@ import io.vavr.control.Either;
 import lombok.Getter;
 import net.yoedtos.entities.error.InvalidTitleError;
 
-public class Note {
+public final class Note {
     @Getter
     private final Title title;
     @Getter

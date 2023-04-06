@@ -1,12 +1,15 @@
 package net.yoedtos.entities;
 
 import io.vavr.control.Either;
+import lombok.Getter;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
 
-public class User {
-    public final Email email;
-    public final Password password;
+public final class User {
+    @Getter
+    private final Email email;
+    @Getter
+    private final Password password;
 
     private User(Email email, Password password) {
         this.email = email;
