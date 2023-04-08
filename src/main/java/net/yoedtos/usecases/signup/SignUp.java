@@ -27,7 +27,7 @@ public class SignUp {
             return Future.of(() -> Either.left(new ExistingUserError(userSignUpRequest)));
         }
         var encodedPassword = this.encoder.encode(userSignUpRequest.getPassword());
-        this.userRepository.addUser(new UserData(userSignUpRequest.getEmail(), encodedPassword));
-        return Future.of(() -> Either.right(userSignUpRequest));
+        var userSignUpResponse = this.userRepository.addUser(new UserData(null, userSignUpRequest.getEmail(), encodedPassword)).get();
+        return Future.of(() -> Either.right(userSignUpResponse));
     }
 }
