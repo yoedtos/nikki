@@ -4,6 +4,8 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import net.yoedtos.entities.UserData;
+import net.yoedtos.entities.error.ExistingTitleError;
+import net.yoedtos.entities.error.InvalidTitleError;
 import net.yoedtos.entities.error.UnregisteredOwnerError;
 import net.yoedtos.usecases.createnote.ports.NoteData;
 import net.yoedtos.usecases.createnote.ports.NoteRepository;
@@ -20,6 +22,7 @@ public class CreateNoteTest {
     private NoteRepository noteRepository;
     private UserRepository userRepository;
     private CreateNote createNoteUseCase;
+    private NoteData validCreateNoteRequest;
 
     @Before
     public void initObject() {
@@ -28,11 +31,11 @@ public class CreateNoteTest {
         userRepository.addUser(validRegisteredUser);
         noteRepository = new InMemoryNoteRepository(new ArrayList<>());
         createNoteUseCase = new CreateNote(noteRepository, userRepository);
+        validCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), VALID_TITLE, emptyContent);
     }
 
     @Test
     public void shouldCreateNoteWithValidUserAndTitle() {
-        var validCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), VALID_TITLE, emptyContent);
         var response = createNoteUseCase.perform(validCreateNoteRequest).get();
         var addedNotes = noteRepository.findAllNotesFrom(validRegisteredUser.getId()).get();
         assertThat(addedNotes.size()).isEqualTo(1);
@@ -47,5 +50,23 @@ public class CreateNoteTest {
         var error = createNoteUseCase.perform(inValidCreateNoteRequest).get();
         assertThat(error.getLeft()).isExactlyInstanceOf(UnregisteredOwnerError.class);
         assertThat(error.getLeft().getMessage()).isEqualTo("Owner unregistered.");
+    }
+
+    @Test
+    public void shouldNotCreateNoteWithInvalidTitle() {
+        var invalidTitle = "";
+        var inValidCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), invalidTitle, emptyContent);
+        var error = createNoteUseCase.perform(inValidCreateNoteRequest).get();
+        assertThat(error.getLeft()).isExactlyInstanceOf(InvalidTitleError.class);
+        assertThat(error.getLeft().getMessage()).isEqualTo("Invalid title: " + invalidTitle + ".");
+    }
+
+    @Test
+    public void shouldNotCreateNoteWithExistingTitle() {
+        noteRepository.addNote(validCreateNoteRequest);
+        var inValidCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), VALID_TITLE, emptyContent);
+        var error = createNoteUseCase.perform(inValidCreateNoteRequest).get();
+        assertThat(error.getLeft()).isExactlyInstanceOf(ExistingTitleError.class);
+        assertThat(error.getLeft().getMessage()).isEqualTo("Title " + VALID_TITLE + " already exist.");
     }
 }
