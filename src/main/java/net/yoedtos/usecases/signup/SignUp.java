@@ -2,6 +2,7 @@ package net.yoedtos.usecases.signup;
 
 import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
+import net.yoedtos.entities.User;
 import net.yoedtos.entities.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.usecases.signup.ports.Encoder;
@@ -17,6 +18,10 @@ public class SignUp {
     }
 
     public Future<Either<Error, UserData>> perform(UserData userSignUpRequest) {
+        var userOrError = User.create(userSignUpRequest);
+        if (userOrError.isLeft()) {
+            return Future.of(() -> Either.left(userOrError.getLeft()));
+        }
         var user = this.userRepository.findUserByEmail(userSignUpRequest.getEmail());
         if (user.get() != null) {
             return Future.of(() -> Either.left(new ExistingUserError(userSignUpRequest)));
