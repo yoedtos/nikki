@@ -1,5 +1,6 @@
 package net.yoedtos.entities;
 
+import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.vavr.control.Either;
@@ -10,29 +11,24 @@ import org.junit.Test;
 public class NoteTest {
 
     private User validOwner;
-    private String validEmail;
-    private String validContent;
 
     @Before
     public void initObject() {
-        validEmail = "my@mail.com";
-        validOwner = User.create(new UserData(null, validEmail, "123ABCabc")).get();
-        validContent = "Content of my note";
+        validOwner = User.create(new UserData(null, VALID_EMAIL, VALID_PASSWORD)).get();
     }
 
     @Test
     public void shouldBeCreatedWithValidTitleAndOwner() {
-        var validTitle = "My note";
-        var note = Note.create(validTitle, validContent, validOwner).get();
-        assertThat(note.getTitle().getValue()).isEqualTo(validTitle);
-        assertThat(note.getContent()).isEqualTo(validContent);
-        assertThat(note.getOwner().getEmail().getValue()).isEqualTo(validEmail);
+        var note = Note.create(VALID_TITLE, VALID_CONTENT, validOwner).get();
+        assertThat(note.getTitle().getValue()).isEqualTo(VALID_TITLE);
+        assertThat(note.getContent()).isEqualTo(VALID_CONTENT);
+        assertThat(note.getOwner().getEmail().getValue()).isEqualTo(VALID_EMAIL);
     }
 
     @Test
     public void shouldNotBeCreatedWithInvalidTitle() {
         var invalidTitle = "";
-        var note = Note.create(invalidTitle, validContent, validOwner);
+        var note = Note.create(invalidTitle, VALID_CONTENT, validOwner);
         assertThat(note).isEqualTo(Either.left(new InvalidTitleError(invalidTitle)));
     }
 }
