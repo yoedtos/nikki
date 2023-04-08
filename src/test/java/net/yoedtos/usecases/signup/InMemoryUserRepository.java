@@ -29,7 +29,8 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public Future<UserData> addUser(UserData userData) {
-        usersData.add(userData);
+        var size = usersData.size();
+        usersData.add(new UserData(Long.valueOf(size), userData.getEmail(), userData.getPassword()));
         return Future.of(() -> usersData.get(0));
     }
 }

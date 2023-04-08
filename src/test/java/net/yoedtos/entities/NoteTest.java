@@ -16,7 +16,7 @@ public class NoteTest {
     @Before
     public void initObject() {
         validEmail = "my@mail.com";
-        validOwner = User.create(new UserData(validEmail, "123ABCabc")).get();
+        validOwner = User.create(new UserData(null, validEmail, "123ABCabc")).get();
         validContent = "Content of my note";
     }
 

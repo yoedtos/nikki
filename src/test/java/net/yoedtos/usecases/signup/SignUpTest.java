@@ -32,7 +32,7 @@ public class SignUpTest {
     @Before
     public void initObjects() {
         MockitoAnnotations.openMocks(this);
-        userSignUpRequest = new UserData(validEmail, validPassword);
+        userSignUpRequest = new UserData(null, validEmail, validPassword);
         userRepository = new InMemoryUserRepository(new ArrayList<>());
         signUpUseCase = new SignUp(userRepository, mockEncoder);
     }
@@ -41,7 +41,7 @@ public class SignUpTest {
     public void shouldSignUpUserWithValidData() {
         when(mockEncoder.encode(validPassword)).thenReturn(encodedPassword);
         var userSignUpResponse = signUpUseCase.perform(userSignUpRequest).get();
-        assertThat(userSignUpResponse.get()).isEqualTo(userSignUpRequest);
+        assertThat(userSignUpResponse.get().getId()).isEqualTo(0);
         assertThat(userRepository.findAllUsers().get().size()).isEqualTo(1);
         assertThat(userRepository.findUserByEmail(validEmail).get().getPassword()).isEqualTo(encodedPassword);
     }
@@ -55,14 +55,14 @@ public class SignUpTest {
 
     @Test
     public void shouldNotSignUpUserWithInvalidEmail() {
-        var user = signUpUseCase.perform(new UserData(invalidEmail, validPassword)).get();
+        var user = signUpUseCase.perform(new UserData(null, invalidEmail, validPassword)).get();
         assertThat(user.getLeft()).isExactlyInstanceOf(InvalidEmailError.class);
         assertThat(user.getLeft().getMessage()).isEqualTo("Invalid email: " + invalidEmail + ".");
     }
 
     @Test
     public void shouldNotSignUpUserWithInvalidPassword() {
-        var user = signUpUseCase.perform(new UserData(validEmail, invalidPassword)).get();
+        var user = signUpUseCase.perform(new UserData(null, validEmail, invalidPassword)).get();
         assertThat(user.getLeft()).isExactlyInstanceOf(InvalidPasswordError.class);
         assertThat(user.getLeft().getMessage()).isEqualTo("Invalid password.");
     }
