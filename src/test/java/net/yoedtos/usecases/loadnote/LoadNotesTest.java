@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class LoadNotesTest {
     private NoteRepository noteRepository;
     private Long validUserId = 0L;
+    private Long invalidUserId = 1L;
     private final String titleOne = "Note 1";
     private final String titleTwo = "Note 2";
 
@@ -34,5 +35,12 @@ public class LoadNotesTest {
         assertThat(notes.size()).isEqualTo(2);
         assertThat(notes.get(0).getTitle()).isEqualTo(titleOne);
         assertThat(notes.get(1).getTitle()).isEqualTo(titleTwo);
+    }
+
+    @Test
+    public void shouldFailLoadNotesForUserWithoutNotes() {
+        var loadNoteUseCase = new LoadNotes(noteRepository);
+        var notes = loadNoteUseCase.perform(invalidUserId).get();
+        assertThat(notes.size()).isEqualTo(0);
     }
 }
