@@ -1,4 +1,4 @@
-package net.yoedtos.usecases.createnote;
+package net.yoedtos.usecases.doubles.repositories;
 
 import io.vavr.concurrent.Future;
 import net.yoedtos.usecases.createnote.ports.NoteData;

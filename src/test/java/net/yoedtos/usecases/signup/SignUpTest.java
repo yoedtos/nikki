@@ -8,6 +8,7 @@ import net.yoedtos.entities.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
+import net.yoedtos.usecases.doubles.repositories.InMemoryUserRepository;
 import net.yoedtos.usecases.signup.ports.Encoder;
 import net.yoedtos.usecases.signup.ports.UserRepository;
 import org.junit.Before;

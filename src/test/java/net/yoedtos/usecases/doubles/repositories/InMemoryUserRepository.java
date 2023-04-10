@@ -1,4 +1,4 @@
-package net.yoedtos.usecases.signup;
+package net.yoedtos.usecases.doubles.repositories;
 
 import io.vavr.concurrent.Future;
 import net.yoedtos.entities.UserData;
