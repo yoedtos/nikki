@@ -14,6 +14,6 @@ public class LoadNotes {
     }
 
     public Future<List<NoteData>> perform(Long validUserId) {
-        return Future.of(() -> this.noteRepository.findAllNotesFrom(validUserId)).get();
+        return Future.of(() -> this.noteRepository.findAllNotesFrom(validUserId));
     }
 }

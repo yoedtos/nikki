@@ -4,12 +4,12 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
 import net.yoedtos.usecases.doubles.repositories.InMemoryUserRepository;
 import net.yoedtos.usecases.ports.Encoder;
+import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.usecases.ports.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,8 +39,8 @@ public class SignUpTest {
         when(mockEncoder.encode(VALID_PASSWORD)).thenReturn(encodedPassword);
         var userSignUpResponse = signUpUseCase.perform(userSignUpRequest).get();
         assertThat(userSignUpResponse.get().getId()).isEqualTo(0);
-        assertThat(userRepository.findAllUsers().get().size()).isEqualTo(1);
-        assertThat(userRepository.findUserByEmail(VALID_EMAIL).get().getPassword()).isEqualTo(encodedPassword);
+        assertThat(userRepository.findAllUsers().size()).isEqualTo(1);
+        assertThat(userRepository.findUserByEmail(VALID_EMAIL).getPassword()).isEqualTo(encodedPassword);
     }
 
     @Test

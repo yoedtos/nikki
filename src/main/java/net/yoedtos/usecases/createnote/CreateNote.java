@@ -21,11 +21,11 @@ public class CreateNote {
     }
 
     public Future<Either<Error, NoteData>> perform(NoteData request) {
-        var owner = this.userRepository.findUserByEmail(request.getOwnerEmail()).get();
+        var owner = this.userRepository.findUserByEmail(request.getOwnerEmail());
         if (owner == null) {
             return Future.of(() -> Either.left(new UnregisteredOwnerError()));
         }
-        var ownerNotes = this.noteRepository.findAllNotesFrom(request.getOwnerId()).get();
+        var ownerNotes = this.noteRepository.findAllNotesFrom(request.getOwnerId());
         var size = ownerNotes.stream()
                 .filter(note -> note.getTitle().equals(request.getTitle()))
                 .count();
@@ -38,6 +38,6 @@ public class CreateNote {
         }
         var note = noteOrError.get();
         var noteData = new NoteData(null, owner.getId(), owner.getEmail(), note.getTitle().getValue(), note.getContent());
-        return Future.of(() -> Either.right(this.noteRepository.addNote(noteData).get()));
+        return Future.of(() -> Either.right(this.noteRepository.addNote(noteData)));
     }
 }

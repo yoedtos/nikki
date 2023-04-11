@@ -1,6 +1,5 @@
 package net.yoedtos.usecases.doubles.repositories;
 
-import io.vavr.concurrent.Future;
 import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.usecases.ports.UserRepository;
 
@@ -16,21 +15,21 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public Future<List<UserData>> findAllUsers() {
-        return Future.of(() -> usersData);
+    public List<UserData> findAllUsers() {
+        return usersData;
     }
 
     @Override
-    public Future<UserData> findUserByEmail(String email) {
+    public UserData findUserByEmail(String email) {
         Optional<UserData> userData = usersData.stream()
                 .filter(u -> u.getEmail().equals(email)).findFirst();
-        return Future.of(() -> userData.orElse(null));
+        return userData.orElse(null);
     }
 
     @Override
-    public Future<UserData> addUser(UserData userData) {
+    public UserData addUser(UserData userData) {
         var size = usersData.size();
         usersData.add(new UserData(Long.valueOf(size), userData.getEmail(), userData.getPassword()));
-        return Future.of(() -> usersData.get(0));
+        return usersData.get(0);
     }
 }

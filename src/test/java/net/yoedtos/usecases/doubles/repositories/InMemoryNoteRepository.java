@@ -1,6 +1,5 @@
 package net.yoedtos.usecases.doubles.repositories;
 
-import io.vavr.concurrent.Future;
 import net.yoedtos.usecases.ports.NoteData;
 import net.yoedtos.usecases.ports.NoteRepository;
 
@@ -16,17 +15,17 @@ public class InMemoryNoteRepository implements NoteRepository {
     }
 
     @Override
-    public Future<NoteData> addNote(NoteData noteData) {
+    public NoteData addNote(NoteData noteData) {
         var size = notesData.size();
         var note = new NoteData(Long.valueOf(size), noteData.getOwnerId(), noteData.getOwnerEmail(), noteData.getTitle(), noteData.getContent());
         notesData.add(note);
-        return Future.of(() -> notesData.get(size));
+        return notesData.get(size);
     }
 
     @Override
-    public Future<List<NoteData>> findAllNotesFrom(Long userId) {
-        return Future.of(() -> notesData.stream()
+    public List<NoteData> findAllNotesFrom(Long userId) {
+        return notesData.stream()
                 .filter(note -> note.getOwnerId().equals(userId))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

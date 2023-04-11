@@ -3,9 +3,9 @@ package net.yoedtos.usecases.signup;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import net.yoedtos.entities.User;
-import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.usecases.ports.Encoder;
+import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.usecases.ports.UserRepository;
 
 public class SignUp {
@@ -23,11 +23,11 @@ public class SignUp {
             return Future.of(() -> Either.left(userOrError.getLeft()));
         }
         var user = this.userRepository.findUserByEmail(userSignUpRequest.getEmail());
-        if (user.get() != null) {
+        if (user != null) {
             return Future.of(() -> Either.left(new ExistingUserError(userSignUpRequest)));
         }
         var encodedPassword = this.encoder.encode(userSignUpRequest.getPassword());
-        var userSignUpResponse = this.userRepository.addUser(new UserData(null, userSignUpRequest.getEmail(), encodedPassword)).get();
+        var userSignUpResponse = this.userRepository.addUser(new UserData(null, userSignUpRequest.getEmail(), encodedPassword));
         return Future.of(() -> Either.right(userSignUpResponse));
     }
 }
