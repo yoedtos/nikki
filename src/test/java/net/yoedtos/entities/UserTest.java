@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
+import net.yoedtos.usecases.ports.UserData;
 import org.junit.Test;
 
 public class UserTest {

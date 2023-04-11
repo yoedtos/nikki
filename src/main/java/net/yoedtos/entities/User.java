@@ -4,6 +4,7 @@ import io.vavr.control.Either;
 import lombok.Getter;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
+import net.yoedtos.usecases.ports.UserData;
 
 public final class User {
     @Getter

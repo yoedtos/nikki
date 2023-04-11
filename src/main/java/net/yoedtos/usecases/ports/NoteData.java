@@ -1,4 +1,4 @@
-package net.yoedtos.usecases.createnote.ports;
+package net.yoedtos.usecases.ports;
 
 import lombok.Value;
 

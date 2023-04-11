@@ -7,9 +7,9 @@ import net.yoedtos.entities.User;
 import net.yoedtos.entities.error.ExistingTitleError;
 import net.yoedtos.entities.error.InvalidTitleError;
 import net.yoedtos.entities.error.UnregisteredOwnerError;
-import net.yoedtos.usecases.createnote.ports.NoteData;
-import net.yoedtos.usecases.createnote.ports.NoteRepository;
-import net.yoedtos.usecases.signup.ports.UserRepository;
+import net.yoedtos.usecases.ports.NoteData;
+import net.yoedtos.usecases.ports.NoteRepository;
+import net.yoedtos.usecases.ports.UserRepository;
 
 public class CreateNote {
     private final NoteRepository noteRepository;

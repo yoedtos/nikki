@@ -1,7 +1,6 @@
 package net.yoedtos.entities.error;
 
 import lombok.EqualsAndHashCode;
-import net.yoedtos.entities.UserData;
 
 @EqualsAndHashCode
 public class ExistingTitleError extends Error {

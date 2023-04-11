@@ -1,8 +1,8 @@
 package net.yoedtos.usecases.doubles.repositories;
 
 import io.vavr.concurrent.Future;
-import net.yoedtos.entities.UserData;
-import net.yoedtos.usecases.signup.ports.UserRepository;
+import net.yoedtos.usecases.ports.UserData;
+import net.yoedtos.usecases.ports.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

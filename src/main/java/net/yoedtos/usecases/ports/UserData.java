@@ -1,4 +1,4 @@
-package net.yoedtos.entities;
+package net.yoedtos.usecases.ports;
 
 import lombok.Value;
 

@@ -3,10 +3,10 @@ package net.yoedtos.usecases.signup;
 import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
 import net.yoedtos.entities.User;
-import net.yoedtos.entities.UserData;
+import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
-import net.yoedtos.usecases.signup.ports.Encoder;
-import net.yoedtos.usecases.signup.ports.UserRepository;
+import net.yoedtos.usecases.ports.Encoder;
+import net.yoedtos.usecases.ports.UserRepository;
 
 public class SignUp {
     private final UserRepository userRepository;

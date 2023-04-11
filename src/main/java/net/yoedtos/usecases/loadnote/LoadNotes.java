@@ -1,8 +1,8 @@
 package net.yoedtos.usecases.loadnote;
 
 import io.vavr.concurrent.Future;
-import net.yoedtos.usecases.createnote.ports.NoteData;
-import net.yoedtos.usecases.createnote.ports.NoteRepository;
+import net.yoedtos.usecases.ports.NoteData;
+import net.yoedtos.usecases.ports.NoteRepository;
 
 import java.util.List;
 

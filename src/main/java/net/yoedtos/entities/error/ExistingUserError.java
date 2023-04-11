@@ -1,7 +1,7 @@
 package net.yoedtos.entities.error;
 
 import lombok.EqualsAndHashCode;
-import net.yoedtos.entities.UserData;
+import net.yoedtos.usecases.ports.UserData;
 
 @EqualsAndHashCode
 public class ExistingUserError extends Error {

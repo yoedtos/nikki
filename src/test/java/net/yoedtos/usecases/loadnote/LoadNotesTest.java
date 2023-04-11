@@ -4,8 +4,8 @@ import static net.yoedtos.usecases.TestConstant.VALID_EMAIL;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import net.yoedtos.usecases.doubles.repositories.InMemoryNoteRepository;
-import net.yoedtos.usecases.createnote.ports.NoteData;
-import net.yoedtos.usecases.createnote.ports.NoteRepository;
+import net.yoedtos.usecases.ports.NoteData;
+import net.yoedtos.usecases.ports.NoteRepository;
 import org.junit.Before;
 import org.junit.Test;
 

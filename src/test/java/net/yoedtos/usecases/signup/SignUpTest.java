@@ -4,13 +4,13 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import net.yoedtos.entities.UserData;
+import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
 import net.yoedtos.usecases.doubles.repositories.InMemoryUserRepository;
-import net.yoedtos.usecases.signup.ports.Encoder;
-import net.yoedtos.usecases.signup.ports.UserRepository;
+import net.yoedtos.usecases.ports.Encoder;
+import net.yoedtos.usecases.ports.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

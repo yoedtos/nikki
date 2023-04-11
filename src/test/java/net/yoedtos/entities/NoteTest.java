@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import io.vavr.control.Either;
 import net.yoedtos.entities.error.InvalidTitleError;
+import net.yoedtos.usecases.ports.UserData;
 import org.junit.Before;
 import org.junit.Test;
 

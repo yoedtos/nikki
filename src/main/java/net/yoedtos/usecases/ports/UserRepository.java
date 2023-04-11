@@ -1,7 +1,6 @@
-package net.yoedtos.usecases.signup.ports;
+package net.yoedtos.usecases.ports;
 
 import io.vavr.concurrent.Future;
-import net.yoedtos.entities.UserData;
 
 import java.util.List;
 
