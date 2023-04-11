@@ -28,4 +28,9 @@ public class InMemoryNoteRepository implements NoteRepository {
                 .filter(note -> note.getOwnerId().equals(userId))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Future<NoteData> findNote(Long noteId) {
+        return null;
+    }
 }
