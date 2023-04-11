@@ -30,7 +30,20 @@ public class InMemoryNoteRepository implements NoteRepository {
     }
 
     @Override
-    public Future<NoteData> findNote(Long noteId) {
+    public NoteData findNote(Long noteId) {
+        var optional = this.notesData.stream()
+                .filter(n -> n.getId() == noteId)
+                .findFirst();
+        return optional.orElse(null);
+    }
+
+    @Override
+    public NoteData remove(Long noteId) {
+        var note = findNote(noteId);
+        if (note != null) {
+            this.notesData.remove(note);
+            return note;
+        }
         return null;
     }
 }
