@@ -7,4 +7,5 @@ public interface NoteRepository {
     List<NoteData> findAllNotesFrom(Long userId);
     NoteData findNote(Long noteId);
     NoteData remove(Long noteId);
+    NoteData update(Long noteId, String title, String content);
 }
