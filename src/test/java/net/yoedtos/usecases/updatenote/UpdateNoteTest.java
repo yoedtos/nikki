@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import net.yoedtos.usecases.doubles.repositories.InMemoryNoteRepository;
 import net.yoedtos.usecases.ports.NoteData;
 import net.yoedtos.usecases.ports.NoteRepository;
-import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.usecases.ports.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +33,7 @@ public class UpdateNoteTest {
 
     @Test
     public void shouldUpdateTitleAndContentOfExistingNote() {
-        var userData = new UserData(VALID_USER_ID, VALID_EMAIL, VALID_PASSWORD);
-        when(userRepository.findUserByEmail(VALID_EMAIL)).thenReturn(userData);
+        when(userRepository.findUserByEmail(VALID_EMAIL)).thenReturn(VALID_USER);
 
         var updateNoteUseCase = new UpdateNote(noteRepository, userRepository);
         var response = updateNoteUseCase.perform(NOTE_ID, newNote).get();

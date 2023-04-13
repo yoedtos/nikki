@@ -35,12 +35,11 @@ public class SignUpTest {
 
     @Test
     public void shouldSignUpUserWithValidData() {
-        String encodedPassword = "ENCRYPTED";
-        when(mockEncoder.encode(VALID_PASSWORD)).thenReturn(encodedPassword);
+        when(mockEncoder.encode(VALID_PASSWORD)).thenReturn(ENCODED_PASSWORD);
         var userSignUpResponse = signUpUseCase.perform(userSignUpRequest).get();
         assertThat(userSignUpResponse.get().getId()).isEqualTo(0);
         assertThat(userRepository.findAllUsers().size()).isEqualTo(1);
-        assertThat(userRepository.findUserByEmail(VALID_EMAIL).getPassword()).isEqualTo(encodedPassword);
+        assertThat(userRepository.findUserByEmail(VALID_EMAIL).getPassword()).isEqualTo(ENCODED_PASSWORD);
     }
 
     @Test

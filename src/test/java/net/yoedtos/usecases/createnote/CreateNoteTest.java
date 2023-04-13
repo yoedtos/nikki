@@ -27,7 +27,7 @@ public class CreateNoteTest {
 
     @Before
     public void initObject() {
-        validRegisteredUser = new UserData(0L, VALID_EMAIL, VALID_PASSWORD);
+        validRegisteredUser = VALID_USER;
         userRepository = new InMemoryUserRepository(new ArrayList<>());
         userRepository.addUser(validRegisteredUser);
         noteRepository = new InMemoryNoteRepository(new ArrayList<>());
