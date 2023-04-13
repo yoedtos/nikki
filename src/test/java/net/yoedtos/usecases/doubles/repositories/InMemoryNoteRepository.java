@@ -46,4 +46,10 @@ public class InMemoryNoteRepository implements NoteRepository {
         }
         return null;
     }
+
+    @Override
+    public NoteData update(Long noteId, String title, String content) {
+        var noteData = this.findNote(noteId);
+        return new NoteData(noteId, noteData.getOwnerId(), noteData.getOwnerEmail(), title, content);
+    }
 }
