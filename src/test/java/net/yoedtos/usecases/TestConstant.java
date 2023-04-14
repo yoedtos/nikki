@@ -18,4 +18,5 @@ public class TestConstant {
     public static final NoteData NOTE_ONE =  new NoteData(NOTE_ID, VALID_USER_ID, VALID_EMAIL, TITLE_ONE, "Content One");
     public static final NoteData NOTE_TWO =  new NoteData(1L, VALID_USER_ID, VALID_EMAIL, TITLE_TWO, "Content Two");
     public static final UserData VALID_USER = new UserData(VALID_USER_ID, VALID_EMAIL, VALID_PASSWORD);
+    public static final UserData DB_USER = new UserData(VALID_USER_ID, VALID_EMAIL, ENCODED_PASSWORD);
 }
