@@ -38,13 +38,13 @@ public class SignUpTest {
         when(mockEncoder.encode(VALID_PASSWORD)).thenReturn(ENCODED_PASSWORD);
         var userSignUpResponse = signUpUseCase.perform(userSignUpRequest).get();
         assertThat(userSignUpResponse.get().getId()).isEqualTo(0);
-        assertThat(userRepository.findAllUsers().size()).isEqualTo(1);
-        assertThat(userRepository.findUserByEmail(VALID_EMAIL).getPassword()).isEqualTo(ENCODED_PASSWORD);
+        assertThat(userRepository.findAll().size()).isEqualTo(1);
+        assertThat(userRepository.findByEmail(VALID_EMAIL).getPassword()).isEqualTo(ENCODED_PASSWORD);
     }
 
     @Test
     public void shouldNotSignUpAgainExistingUser() {
-        userRepository.addUser(userSignUpRequest);
+        userRepository.add(userSignUpRequest);
         var error = signUpUseCase.perform(userSignUpRequest).get();
         assertThat(error.getLeft()).isEqualTo(new ExistingUserError(userSignUpRequest));
     }

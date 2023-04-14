@@ -15,19 +15,19 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public List<UserData> findAllUsers() {
+    public List<UserData> findAll() {
         return usersData;
     }
 
     @Override
-    public UserData findUserByEmail(String email) {
+    public UserData findByEmail(String email) {
         Optional<UserData> userData = usersData.stream()
                 .filter(u -> u.getEmail().equals(email)).findFirst();
         return userData.orElse(null);
     }
 
     @Override
-    public UserData addUser(UserData userData) {
+    public UserData add(UserData userData) {
         var size = usersData.size();
         usersData.add(new UserData(Long.valueOf(size), userData.getEmail(), userData.getPassword()));
         return usersData.get(0);

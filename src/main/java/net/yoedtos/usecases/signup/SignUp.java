@@ -22,12 +22,12 @@ public class SignUp {
         if (userOrError.isLeft()) {
             return Future.of(() -> Either.left(userOrError.getLeft()));
         }
-        var user = this.userRepository.findUserByEmail(userSignUpRequest.getEmail());
+        var user = this.userRepository.findByEmail(userSignUpRequest.getEmail());
         if (user != null) {
             return Future.of(() -> Either.left(new ExistingUserError(userSignUpRequest)));
         }
         var encodedPassword = this.encoder.encode(userSignUpRequest.getPassword());
-        var userSignUpResponse = this.userRepository.addUser(new UserData(null, userSignUpRequest.getEmail(), encodedPassword));
+        var userSignUpResponse = this.userRepository.add(new UserData(null, userSignUpRequest.getEmail(), encodedPassword));
         return Future.of(() -> Either.right(userSignUpResponse));
     }
 }

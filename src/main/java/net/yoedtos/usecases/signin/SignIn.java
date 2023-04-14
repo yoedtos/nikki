@@ -2,7 +2,6 @@ package net.yoedtos.usecases.signin;
 
 import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
-import net.yoedtos.entities.error.InvalidPasswordError;
 import net.yoedtos.entities.error.UserNotFoundError;
 import net.yoedtos.entities.error.WrongPasswordError;
 import net.yoedtos.usecases.ports.Encoder;
@@ -19,7 +18,7 @@ public class SignIn {
     }
 
     public Future<Either<Error,UserData>> perform(UserData validUser) {
-        var user = this.userRepository.findUserByEmail(validUser.getEmail());
+        var user = this.userRepository.findByEmail(validUser.getEmail());
         if (user == null) {
             return Future.of(() -> Either.left(new UserNotFoundError()));
         }
