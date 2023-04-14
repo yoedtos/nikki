@@ -29,7 +29,7 @@ public class CreateNoteTest {
     public void initObject() {
         validRegisteredUser = VALID_USER;
         userRepository = new InMemoryUserRepository(new ArrayList<>());
-        userRepository.addUser(validRegisteredUser);
+        userRepository.add(validRegisteredUser);
         noteRepository = new InMemoryNoteRepository(new ArrayList<>());
         createNoteUseCase = new CreateNote(noteRepository, userRepository);
         validCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), VALID_TITLE, emptyContent);
@@ -64,7 +64,7 @@ public class CreateNoteTest {
 
     @Test
     public void shouldNotCreateNoteWithExistingTitle() {
-        noteRepository.addNote(validCreateNoteRequest);
+        noteRepository.add(validCreateNoteRequest);
         var inValidCreateNoteRequest = new NoteData(null, validRegisteredUser.getId(), validRegisteredUser.getEmail(), VALID_TITLE, emptyContent);
         var error = createNoteUseCase.perform(inValidCreateNoteRequest).get();
         assertThat(error.getLeft()).isExactlyInstanceOf(ExistingTitleError.class);

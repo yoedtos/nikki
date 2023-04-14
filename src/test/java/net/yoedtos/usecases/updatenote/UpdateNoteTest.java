@@ -33,7 +33,7 @@ public class UpdateNoteTest {
 
     @Test
     public void shouldUpdateTitleAndContentOfExistingNote() {
-        when(userRepository.findUserByEmail(VALID_EMAIL)).thenReturn(VALID_USER);
+        when(userRepository.findByEmail(VALID_EMAIL)).thenReturn(VALID_USER);
 
         var updateNoteUseCase = new UpdateNote(noteRepository, userRepository);
         var response = updateNoteUseCase.perform(NOTE_ID, newNote).get();

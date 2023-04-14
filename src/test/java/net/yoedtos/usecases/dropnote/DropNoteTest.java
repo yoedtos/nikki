@@ -24,6 +24,6 @@ public class DropNoteTest {
         var dropNoteUseCase = new DropNote(noteRepository);
         var dropped = dropNoteUseCase.perform(NOTE_ID).get();
         assertThat(dropped).isEqualTo(NOTE_ONE);
-        assertThat(noteRepository.findNote(NOTE_ID)).isNull();
+        assertThat(noteRepository.findById(NOTE_ID)).isNull();
     }
 }

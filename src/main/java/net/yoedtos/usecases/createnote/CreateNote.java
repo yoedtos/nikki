@@ -21,7 +21,7 @@ public class CreateNote {
     }
 
     public Future<Either<Error, NoteData>> perform(NoteData request) {
-        var owner = this.userRepository.findUserByEmail(request.getOwnerEmail());
+        var owner = this.userRepository.findByEmail(request.getOwnerEmail());
         if (owner == null) {
             return Future.of(() -> Either.left(new UnregisteredOwnerError()));
         }
@@ -38,6 +38,6 @@ public class CreateNote {
         }
         var note = noteOrError.get();
         var noteData = new NoteData(null, owner.getId(), owner.getEmail(), note.getTitle().getValue(), note.getContent());
-        return Future.of(() -> Either.right(this.noteRepository.addNote(noteData)));
+        return Future.of(() -> Either.right(this.noteRepository.add(noteData)));
     }
 }

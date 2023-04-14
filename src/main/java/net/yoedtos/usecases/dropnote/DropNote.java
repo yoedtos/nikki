@@ -13,7 +13,7 @@ public class DropNote {
 
     public Future<NoteData> perform(Long noteId) {
         return Future.of(() -> {
-            var note = this.noteRepository.findNote(noteId);
+            var note = this.noteRepository.findById(noteId);
             if (note != null) {
                 this.noteRepository.remove(noteId);
             }

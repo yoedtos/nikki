@@ -19,7 +19,7 @@ public class UpdateNote {
     }
 
     public Future<Either<Error, NoteData>> perform(Long noteId, NoteData newNote) {
-        var user = User.create(this.userRepository.findUserByEmail(newNote.getOwnerEmail())).get();
+        var user = User.create(this.userRepository.findByEmail(newNote.getOwnerEmail())).get();
         var noteOrError = Note.create(newNote.getTitle(), newNote.getContent(), user);
         if (noteOrError.isLeft()) {
             return Future.of(() -> Either.left(noteOrError.getLeft()));

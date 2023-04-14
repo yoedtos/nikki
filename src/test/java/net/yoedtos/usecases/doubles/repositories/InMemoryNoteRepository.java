@@ -15,7 +15,7 @@ public class InMemoryNoteRepository implements NoteRepository {
     }
 
     @Override
-    public NoteData addNote(NoteData noteData) {
+    public NoteData add(NoteData noteData) {
         var size = notesData.size();
         var note = new NoteData(Long.valueOf(size), noteData.getOwnerId(), noteData.getOwnerEmail(), noteData.getTitle(), noteData.getContent());
         notesData.add(note);
@@ -30,7 +30,7 @@ public class InMemoryNoteRepository implements NoteRepository {
     }
 
     @Override
-    public NoteData findNote(Long noteId) {
+    public NoteData findById(Long noteId) {
         var optional = this.notesData.stream()
                 .filter(n -> n.getId() == noteId)
                 .findFirst();
@@ -39,7 +39,7 @@ public class InMemoryNoteRepository implements NoteRepository {
 
     @Override
     public NoteData remove(Long noteId) {
-        var note = findNote(noteId);
+        var note = findById(noteId);
         if (note != null) {
             this.notesData.remove(note);
             return note;
@@ -49,7 +49,7 @@ public class InMemoryNoteRepository implements NoteRepository {
 
     @Override
     public NoteData update(Long noteId, String title, String content) {
-        var noteData = this.findNote(noteId);
+        var noteData = this.findById(noteId);
         return new NoteData(noteId, noteData.getOwnerId(), noteData.getOwnerEmail(), title, content);
     }
 }

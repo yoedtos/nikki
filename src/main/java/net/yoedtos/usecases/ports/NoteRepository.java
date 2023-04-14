@@ -3,9 +3,9 @@ package net.yoedtos.usecases.ports;
 import java.util.List;
 
 public interface NoteRepository {
-    NoteData addNote(NoteData noteData);
+    NoteData add(NoteData noteData);
     List<NoteData> findAllNotesFrom(Long userId);
-    NoteData findNote(Long noteId);
+    NoteData findById(Long noteId);
     NoteData remove(Long noteId);
     NoteData update(Long noteId, String title, String content);
 }
