@@ -4,6 +4,7 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import net.yoedtos.entities.error.UserNotFoundError;
 import net.yoedtos.entities.error.WrongPasswordError;
 import net.yoedtos.usecases.doubles.repositories.InMemoryUserRepository;
 import net.yoedtos.usecases.ports.Encoder;
@@ -46,5 +47,14 @@ public class SignInTest {
         var error = response.getLeft();
         assertThat(error).isExactlyInstanceOf(WrongPasswordError.class);
         assertThat(error.getMessage()).isEqualTo("Wrong password.");
+    }
+
+    @Test
+    public void shouldNotSignInWithUnregisteredUser() {
+        var unRegisteredUser = new UserData(null, "unknow@mail.com", "passworD456");
+        var response = signInUseCase.perform(unRegisteredUser).get();
+        var error = response.getLeft();
+        assertThat(error).isExactlyInstanceOf(UserNotFoundError.class);
+        assertThat(error.getMessage()).isEqualTo("User not found.");
     }
 }
