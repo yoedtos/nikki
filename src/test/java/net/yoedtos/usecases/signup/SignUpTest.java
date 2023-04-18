@@ -4,6 +4,7 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import net.yoedtos.builders.UserBuilder;
 import net.yoedtos.entities.error.ExistingUserError;
 import net.yoedtos.entities.error.InvalidEmailError;
 import net.yoedtos.entities.error.InvalidPasswordError;
@@ -28,7 +29,7 @@ public class SignUpTest {
     @Before
     public void initObjects() {
         MockitoAnnotations.openMocks(this);
-        userSignUpRequest = new UserData(null, VALID_EMAIL, VALID_PASSWORD);
+        userSignUpRequest = UserBuilder.create().build();
         userRepository = new InMemoryUserRepository(new ArrayList<>());
         signUpUseCase = new SignUp(userRepository, mockEncoder);
     }
@@ -51,14 +52,16 @@ public class SignUpTest {
 
     @Test
     public void shouldNotSignUpUserWithInvalidEmail() {
-        var user = signUpUseCase.perform(new UserData(null, INVALID_EMAIL, VALID_PASSWORD)).get();
+        var invalidUser = UserBuilder.create().withInvalidEmail().build();
+        var user = signUpUseCase.perform(invalidUser).get();
         assertThat(user.getLeft()).isExactlyInstanceOf(InvalidEmailError.class);
         assertThat(user.getLeft().getMessage()).isEqualTo("Invalid email: " + INVALID_EMAIL + ".");
     }
 
     @Test
     public void shouldNotSignUpUserWithInvalidPassword() {
-        var user = signUpUseCase.perform(new UserData(null, VALID_EMAIL, INVALID_PASSWORD)).get();
+        var invalidUser = UserBuilder.create().withInvalidPassword().build();
+        var user = signUpUseCase.perform(invalidUser).get();
         assertThat(user.getLeft()).isExactlyInstanceOf(InvalidPasswordError.class);
         assertThat(user.getLeft().getMessage()).isEqualTo("Invalid password.");
     }

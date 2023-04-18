@@ -4,6 +4,7 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import net.yoedtos.builders.UserBuilder;
 import net.yoedtos.usecases.doubles.repositories.InMemoryNoteRepository;
 import net.yoedtos.usecases.ports.NoteData;
 import net.yoedtos.usecases.ports.NoteRepository;
@@ -33,7 +34,8 @@ public class UpdateNoteTest {
 
     @Test
     public void shouldUpdateTitleAndContentOfExistingNote() {
-        when(userRepository.findByEmail(VALID_EMAIL)).thenReturn(VALID_USER);
+        var validUser = UserBuilder.create().build();
+        when(userRepository.findByEmail(VALID_EMAIL)).thenReturn(validUser);
 
         var updateNoteUseCase = new UpdateNote(noteRepository, userRepository);
         var response = updateNoteUseCase.perform(NOTE_ID, newNote).get();

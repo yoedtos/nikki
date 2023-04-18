@@ -4,11 +4,11 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import net.yoedtos.builders.UserBuilder;
 import net.yoedtos.entities.error.UserNotFoundError;
 import net.yoedtos.entities.error.WrongPasswordError;
 import net.yoedtos.usecases.doubles.repositories.InMemoryUserRepository;
 import net.yoedtos.usecases.ports.Encoder;
-import net.yoedtos.usecases.ports.UserData;
 import net.yoedtos.usecases.ports.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignInTest {
-    private String wrongPassword = "drowssaP321";
     private UserRepository userRepository;
     private SignIn signInUseCase;
 
@@ -35,14 +34,15 @@ public class SignInTest {
 
     @Test
     public void shouldSignInWithCorrectPassword() {
+        var validUser = UserBuilder.create().build();
         when(mockEncoder.compare(VALID_PASSWORD, ENCODED_PASSWORD)).thenReturn(true);
-        var userResponse = signInUseCase.perform(VALID_USER).get();
-        assertThat(userResponse.get()).isEqualTo(VALID_USER);
+        var userResponse = signInUseCase.perform(validUser).get();
+        assertThat(userResponse.get()).isEqualTo(validUser);
     }
 
     @Test
     public void shouldNotSignInWithIncorrectPassword() {
-        var invalidUser = new UserData(null, VALID_EMAIL, wrongPassword);
+        var invalidUser = UserBuilder.create().withWrongPassword().build();
         var response = signInUseCase.perform(invalidUser).get();
         var error = response.getLeft();
         assertThat(error).isExactlyInstanceOf(WrongPasswordError.class);
@@ -51,7 +51,7 @@ public class SignInTest {
 
     @Test
     public void shouldNotSignInWithUnregisteredUser() {
-        var unRegisteredUser = new UserData(null, "unknow@mail.com", "passworD456");
+        var unRegisteredUser = UserBuilder.create().withUnregisteredEmail().build();
         var response = signInUseCase.perform(unRegisteredUser).get();
         var error = response.getLeft();
         assertThat(error).isExactlyInstanceOf(UserNotFoundError.class);
