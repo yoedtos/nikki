@@ -10,6 +10,7 @@ public class TestConstant {
     public static final String INVALID_PASSWORD = "password";
     public static final String ENCODED_PASSWORD = "ENCRYPTED";
     public static final String VALID_TITLE = "My Note";
+    public static final String INVALID_TITLE = "";
     public static final String VALID_CONTENT = "Content of my note";
     public static final String TITLE_ONE = "Note 1";
     public static final String TITLE_TWO = "Note 2";

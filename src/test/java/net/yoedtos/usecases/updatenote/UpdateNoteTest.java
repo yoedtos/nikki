@@ -4,9 +4,9 @@ import static net.yoedtos.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import net.yoedtos.builders.NoteBuilder;
 import net.yoedtos.builders.UserBuilder;
 import net.yoedtos.usecases.doubles.repositories.InMemoryNoteRepository;
-import net.yoedtos.usecases.ports.NoteData;
 import net.yoedtos.usecases.ports.NoteRepository;
 import net.yoedtos.usecases.ports.UserRepository;
 import org.junit.Before;
@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateNoteTest {
-    private String newTitle = "Title changed";
-    private String newContent = "Content One Changed";
-    private NoteData newNote;
     private NoteRepository noteRepository;
     @Mock
     private UserRepository userRepository;
@@ -28,7 +25,6 @@ public class UpdateNoteTest {
     @Before
     public void initObjects() {
         MockitoAnnotations.openMocks(this);
-        newNote = new NoteData(NOTE_ID, VALID_USER_ID, VALID_EMAIL, newTitle, newContent);
         noteRepository = new InMemoryNoteRepository(new ArrayList<>(List.of(NOTE_ONE)));
     }
 
@@ -36,11 +32,11 @@ public class UpdateNoteTest {
     public void shouldUpdateTitleAndContentOfExistingNote() {
         var validUser = UserBuilder.create().build();
         when(userRepository.findByEmail(VALID_EMAIL)).thenReturn(validUser);
-
+        var newNote = NoteBuilder.create().build();
         var updateNoteUseCase = new UpdateNote(noteRepository, userRepository);
         var response = updateNoteUseCase.perform(NOTE_ID, newNote).get();
         var updateNote = response.get();
-        assertThat(updateNote.getTitle()).isEqualTo(newTitle);
-        assertThat(updateNote.getContent()).isEqualTo(newContent);
+        assertThat(updateNote.getTitle()).isEqualTo(VALID_TITLE);
+        assertThat(updateNote.getContent()).isEqualTo(VALID_CONTENT);
     }
 }
