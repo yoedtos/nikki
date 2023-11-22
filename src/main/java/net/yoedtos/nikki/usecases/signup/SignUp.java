@@ -5,11 +5,10 @@ import io.vavr.control.Either;
 import net.yoedtos.nikki.entities.User;
 import net.yoedtos.nikki.entities.error.ExistingUserError;
 import net.yoedtos.nikki.usecases.ports.Encoder;
-import net.yoedtos.nikki.usecases.ports.UseCase;
 import net.yoedtos.nikki.usecases.ports.UserData;
 import net.yoedtos.nikki.usecases.ports.UserRepository;
 
-public class SignUp implements UseCase<UserData> {
+public class SignUp {
     private final UserRepository userRepository;
     private final Encoder encoder;
 
@@ -18,7 +17,6 @@ public class SignUp implements UseCase<UserData> {
         this.encoder = encoder;
     }
 
-    @Override
     public Future<Either<Error, UserData>> perform(UserData userSignUpRequest) {
         var userOrError = User.create(userSignUpRequest);
         if (userOrError.isLeft()) {
