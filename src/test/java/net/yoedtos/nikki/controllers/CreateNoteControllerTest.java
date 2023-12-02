@@ -26,12 +26,12 @@ public class CreateNoteControllerTest {
     @InjectMocks
     private CreateNoteController controller;
 
-    private NoteDTO enterDTO;
+    private NoteDTO noteDTO;
 
     @Before
     public void initObjects() {
         MockitoAnnotations.openMocks(this);
-        enterDTO = new NoteDTO(null, TITLE_ONE, VALID_CONTENT);
+        noteDTO = new NoteDTO(null, TITLE_ONE, VALID_CONTENT);
         MainApp.setUserId(VALID_USER_ID);
         MainApp.setUserEmail(VALID_EMAIL);
     }
@@ -40,7 +40,7 @@ public class CreateNoteControllerTest {
     public void shouldCreateNoteWithSuccess() {
         var noteOne = new NoteData(null, VALID_USER_ID, VALID_EMAIL, TITLE_ONE, VALID_CONTENT);
         when(createNoteUseCase.perform(any())).thenReturn(Future.of(() -> Either.right(noteOne)));
-        controller.handle(enterDTO);
+        controller.handle(noteDTO);
         verify(createNoteUseCase, times(1)).perform(noteOne);
     }
 
@@ -48,13 +48,13 @@ public class CreateNoteControllerTest {
     public void shouldNotCreateNoteWithInvalidTitle() {
         when(createNoteUseCase.perform(any())).thenReturn(Future.of(() -> Either.left(new InvalidTitleError(INVALID_TITLE))));
         assertThatThrownBy(() -> {
-            controller.handle(enterDTO);
+            controller.handle(noteDTO);
         }).isInstanceOf(InvalidTitleError.class);
     }
 
     @Test
     public void shouldNotCreateNoteWithSameTitle() {
         when(createNoteUseCase.perform(any())).thenReturn(Future.of(() -> Either.left(new ExistingTitleError(TITLE_ONE))));
-        assertThatThrownBy(() -> controller.handle(enterDTO)).isInstanceOf(ExistingTitleError.class);
+        assertThatThrownBy(() -> controller.handle(noteDTO)).isInstanceOf(ExistingTitleError.class);
     }
 }
