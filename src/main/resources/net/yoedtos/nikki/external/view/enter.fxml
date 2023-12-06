@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+        <Label alignment="CENTER" text="%enter.title">
+            <font>
+                <Font size="18.0" />
+            </font>
+         <VBox.margin>
+            <Insets bottom="10.0" top="20.0" />
+         </VBox.margin>
+        </Label>
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="371.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="122.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="250.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="%enter.email">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin></Label>
+                <Label text="%enter.password" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin></Label>
+                <TextField fx:id="txtEmail" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </GridPane.margin>
+                </TextField>
+                <PasswordField fx:id="pwdPassword" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                    </GridPane.margin>
+                </PasswordField>
+                <CheckBox fx:id="ckBxRegister" mnemonicParsing="false" text="%enter.register" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <GridPane.margin>
+                        <Insets left="10.0" />
+                    </GridPane.margin>
+                </CheckBox>
+            </children>
+        </GridPane>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="btnCancel" onAction="#onCancel" mnemonicParsing="false" text="Cancel">
+              <graphic>
+                  <FontIcon iconLiteral="fth-x-circle" iconSize="16" />
+              </graphic>
+          </Button>
+          <Button fx:id="btnApply" onAction="#onApply" layoutX="296.0" layoutY="19.0" mnemonicParsing="false"  text="Apply">
+              <graphic>
+                  <FontIcon iconLiteral="fth-check-circle" iconSize="16" />
+              </graphic>
+          </Button>
+        </buttons>
+         <padding>
+            <Insets bottom="15.0" right="10.0" top="25.0" />
+         </padding>
+      </ButtonBar>
+   </children>
+</VBox>
