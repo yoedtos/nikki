@@ -3,8 +3,8 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -54,12 +54,12 @@
         </GridPane>
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="btnCancel" onAction="#onCancel" mnemonicParsing="false" text="Cancel">
+          <Button fx:id="btnCancel" onAction="#onCancel" mnemonicParsing="false" text="%enter.cancel">
               <graphic>
                   <FontIcon iconLiteral="fth-x-circle" iconSize="16" />
               </graphic>
           </Button>
-          <Button fx:id="btnApply" onAction="#onApply" layoutX="296.0" layoutY="19.0" mnemonicParsing="false"  text="Apply">
+          <Button fx:id="btnApply" onAction="#onApply" layoutX="296.0" layoutY="19.0" mnemonicParsing="false"  text="%enter.apply">
               <graphic>
                   <FontIcon iconLiteral="fth-check-circle" iconSize="16" />
               </graphic>
