@@ -7,4 +7,9 @@ public class NoteDTO {
     Long id;
     String title;
     String content;
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

@@ -7,4 +7,5 @@ public class Constants {
     public static final String CONFIG_FILE = "nikki.properties";
     public static final String RSRC_BUNDLE = "i18n/text";
     public static final String ENTER_FXML = "enter.fxml";
+    public static final String MAIN_FXML = "main.fxml";
 }
