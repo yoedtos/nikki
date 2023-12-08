@@ -1,4 +1,4 @@
-package net.yoedtos.nikki.external.repository.nitrite;
+package net.yoedtos.nikki.external.repositories.nitrite;
 
 import static net.yoedtos.nikki.usecases.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
