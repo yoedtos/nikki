@@ -24,4 +24,5 @@ public class TestConstant {
     public static final NoteData NOTE_ONE =  new NoteData(NOTE_ID, VALID_USER_ID, VALID_EMAIL, TITLE_ONE, CONTENT_ONE);
     public static final NoteData NOTE_TWO =  new NoteData(1L, VALID_USER_ID, VALID_EMAIL, TITLE_TWO, CONTENT_TWO);
     public static final UserData DB_USER = new UserData(VALID_USER_ID, VALID_EMAIL, ENCODED_PASSWORD);
+    public static final String CLEAR_PASS = "clear-pass";
 }
