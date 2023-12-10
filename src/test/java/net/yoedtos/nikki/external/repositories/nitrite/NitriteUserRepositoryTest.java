@@ -1,11 +1,9 @@
 package net.yoedtos.nikki.external.repositories.nitrite;
 
-import static net.yoedtos.nikki.usecases.TestConstant.*;
+import static net.yoedtos.nikki.usecases.TestConstant.DB_USER;
+import static net.yoedtos.nikki.usecases.TestConstant.VALID_EMAIL;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import net.yoedtos.nikki.external.repositories.nitrite.helper.NitriteException;
-import net.yoedtos.nikki.external.repositories.nitrite.NitriteUserRepository;
 import net.yoedtos.nikki.usecases.ports.UserData;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,8 +38,13 @@ public class NitriteUserRepositoryTest {
 
     @Test
     public void C_shouldNotFindInvalidUser() {
-        assertThatThrownBy(() -> {
-            userRepository.findByEmail("unreal@email.com");
-        }).isInstanceOf(NitriteException.class);
+        var userData = userRepository.findByEmail("unreal@email.com");
+        assertThat(userData).isNull();
+    }
+
+    @Test
+    public void D_shouldFindUserByEmail() {
+        var userData = userRepository.findByEmail(VALID_EMAIL);
+        assertThat(userData.getEmail()).isEqualTo(VALID_EMAIL);
     }
 }
