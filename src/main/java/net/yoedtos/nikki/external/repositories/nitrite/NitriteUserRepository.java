@@ -83,7 +83,7 @@ public class NitriteUserRepository implements UserRepository, Closeable {
     }
 
     private UserData toUserData(User user) {
-        return new UserData(user.getId().getIdValue(),
+        return user == null ? null : new UserData(user.getId().getIdValue(),
                             user.getEmail(),
                             user.getPassword());
     }
