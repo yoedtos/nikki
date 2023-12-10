@@ -25,7 +25,7 @@ public class NitriteNoteRepository implements NoteRepository, Closeable {
     private ObjectRepository<Note> noteRepo;
 
     public NitriteNoteRepository() {
-        this.helper = new NitriteHelper();
+        this.helper = NitriteHelper.getInstance();
         noteRepo = helper.getRepository(Note.class);
     }
 

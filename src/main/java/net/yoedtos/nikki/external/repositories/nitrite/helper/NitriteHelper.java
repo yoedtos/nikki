@@ -18,6 +18,14 @@ public class NitriteHelper {
     private static final String USERNAME = "user_nikki";
     private static final String PASSWORD = "pin_nikki";
 
+    private static NitriteHelper nitriteHelper;
+
+    public static NitriteHelper getInstance() {
+        if (nitriteHelper == null) {
+            nitriteHelper = new NitriteHelper();
+        }
+        return nitriteHelper;
+    }
     private Nitrite nitrite;
 
     public NitriteHelper() {

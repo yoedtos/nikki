@@ -24,7 +24,7 @@ public class NitriteUserRepository implements UserRepository, Closeable {
     private ObjectRepository<User> userRepo;
 
     public NitriteUserRepository() {
-        this.helper = new NitriteHelper();
+        this.helper = NitriteHelper.getInstance();
         userRepo = helper.getRepository(User.class);
     }
 
