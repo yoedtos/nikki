@@ -26,6 +26,6 @@ public class SignIn {
         if (!valid) {
             return Future.of(() -> Either.left(new WrongPasswordError()));
         }
-        return Future.of(() -> Either.right(validUser));
+        return Future.of(() -> Either.right(new UserData(user.getId(), validUser.getEmail(), validUser.getPassword())));
     }
 }
