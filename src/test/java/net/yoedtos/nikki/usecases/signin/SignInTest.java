@@ -1,5 +1,7 @@
 package net.yoedtos.nikki.usecases.signin;
 
+import static net.yoedtos.nikki.usecases.TestConstant.VALID_EMAIL;
+import static net.yoedtos.nikki.usecases.TestConstant.VALID_PASSWORD;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -9,6 +11,7 @@ import net.yoedtos.nikki.entities.error.WrongPasswordError;
 import net.yoedtos.nikki.usecases.TestConstant;
 import net.yoedtos.nikki.usecases.doubles.repositories.InMemoryUserRepository;
 import net.yoedtos.nikki.usecases.ports.Encoder;
+import net.yoedtos.nikki.usecases.ports.UserData;
 import net.yoedtos.nikki.usecases.ports.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,10 +37,11 @@ public class SignInTest {
 
     @Test
     public void shouldSignInWithCorrectPassword() {
-        var validUser = UserBuilder.create().build();
-        when(mockEncoder.compare(TestConstant.VALID_PASSWORD, TestConstant.ENCODED_PASSWORD)).thenReturn(true);
+        var expected = UserBuilder.create().build();
+        var validUser = new UserData(null, VALID_EMAIL, VALID_PASSWORD);
+        when(mockEncoder.compare(VALID_PASSWORD, TestConstant.ENCODED_PASSWORD)).thenReturn(true);
         var userResponse = signInUseCase.perform(validUser).get();
-        assertThat(userResponse.get()).isEqualTo(validUser);
+        assertThat(userResponse.get()).isEqualTo(expected);
     }
 
     @Test
