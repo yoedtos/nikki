@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RunWith(Suite.class)
-@SuiteClasses({CommandLine.class, Controllers.class, Presenters.class})
+@SuiteClasses({CommandLine.class, Controllers.class, Presenters.class, UserInterface.class})
 public class SuiteIT extends BaseIT {
     private static final Logger LOGGER = LoggerFactory.getLogger(SuiteIT.class);
 
