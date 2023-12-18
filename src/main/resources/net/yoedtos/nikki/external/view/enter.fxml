@@ -29,11 +29,11 @@
             <children>
                 <Label text="%enter.email">
                <GridPane.margin>
-                  <Insets left="5.0" />
+                  <Insets left="15.0" />
                </GridPane.margin></Label>
                 <Label text="%enter.password" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets left="5.0" />
+                  <Insets left="15.0" />
                </GridPane.margin></Label>
                 <TextField fx:id="txtEmail" GridPane.columnIndex="1">
                     <GridPane.margin>
