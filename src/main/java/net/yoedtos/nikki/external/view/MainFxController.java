@@ -35,6 +35,7 @@ public class MainFxController extends ViewFx {
     @FXML private WebView webNote;
 
     private Stage stage;
+    private boolean edit;
     private NoteDTO noteDTO;
     private List<NoteDTO> listNotes;
     private LoadNotesPresenter loadNotesPresenter;
@@ -91,9 +92,10 @@ public class MainFxController extends ViewFx {
     @FXML
     public void saveNote() {
         try {
-            if (noteDTO != null) {
+            if (edit && noteDTO != null) {
                 updateNoteController.handle(
                         new NoteDTO(noteDTO.getId(), txtTitle.getText(), htmlContent.getHtmlText()));
+                edit = false;
             } else {
                 createNoteController.handle(
                         new NoteDTO(null, txtTitle.getText(), htmlContent.getHtmlText()));
@@ -122,6 +124,7 @@ public class MainFxController extends ViewFx {
         tabPane.getSelectionModel().select(tabCreate);
         txtTitle.setText(noteDTO.getTitle());
         htmlContent.setHtmlText(noteDTO.getContent());
+        edit = true;
     }
 
     @FXML
@@ -141,6 +144,7 @@ public class MainFxController extends ViewFx {
         viewNotes.refresh();
         webNote.getEngine().loadContent("");
         lbTitle.setText("");
+        noteDTO = null;
     }
 
     public static class Builder {
